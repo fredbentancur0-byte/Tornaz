@@ -410,7 +410,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Keyframe animations used by the announcement bar and hero carousel
+   Keyframe animations used by the announcement bar, promo banner, hero carousel
 --------------------------------------------------------------------------- */
 @keyframes fade-in {
   from {
@@ -418,6 +418,42 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Ken Burns pan/zoom for the promo banner product scenes */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.14) translate3d(-2%, -3%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+/* Diagonal gold sheen sweeping across the promo banner */
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  55% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+
+/* Continuous marquee for the promo banner category ticker */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 

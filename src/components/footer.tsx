@@ -30,6 +30,15 @@ export function Footer() {
   return (
     <footer className="bg-brand-900 text-white">
       <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-16 md:px-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo.png"
+          alt="Tornaz Stores"
+          width={180}
+          height={60}
+          style={{ height: 56, width: "auto", objectFit: "contain" }}
+          className="mb-8 select-none"
+        />
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {columns.map((col) => (
             <div key={col.heading}>

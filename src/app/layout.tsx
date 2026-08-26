@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
-import { AnnouncementBar } from "@/components/announcement-bar";
+import { PromoBanner } from "@/components/promo-banner";
 import { Footer } from "@/components/footer";
 import { BottomBar } from "@/components/bottom-bar";
 import { SITE } from "@/lib/constants";
@@ -82,7 +82,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <AnnouncementBar />
+        <PromoBanner />
         <SiteHeader />
         <main id="main" className="flex-1 pb-16 md:pb-0">
           {children}

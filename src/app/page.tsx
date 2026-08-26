@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, LayoutGrid, Link2, Package } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Link2, Package } from "lucide-react";
 import { fetchProducts } from "@/lib/data-access";
 import { CATEGORIES } from "@/lib/constants";
 import { ProductCard } from "@/components/product-card";
@@ -49,8 +50,18 @@ export default async function HomePage() {
     .filter((p) => p.paySmallSmall && p.productType === "physical")
     .slice(0, 6);
 
-  // Main categories (excludes the "Inverter Generators" sub-category).
+  // Main categories (excludes the "Inverter Generators" sub-category), each
+  // backed by a real product image so the cards feel like the JMPotters layout.
   const mainCategories = CATEGORIES.filter((c) => c.slug !== "inverter-generators");
+
+  // Representative product image per main category (physical product shots).
+  const categoryImage: Record<string, string> = {
+    "generators-power": "/media/products/bright-3-5kva-petrol-generator/1.png",
+    "phones-tablets": "/media/products/tecno-spark-smartphone/1.png",
+    "home-appliances": "/media/products/binatone-standing-fan/1.png",
+    "digital-courses": "/media/products/provisions-store-guide/1.png",
+    "fashion-lifestyle": "/media/products/ankara-fabric-bundle/1.png",
+  };
 
   return (
     <>
@@ -66,16 +77,32 @@ export default async function HomePage() {
             linkHref="/products"
             linkLabel="View all"
           />
-          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {mainCategories.map((c) => (
               <Link
                 key={c.slug}
                 href={`/products?category=${c.slug}`}
-                className="group rounded-xl border border-border bg-surface p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring"
+                className="group relative block overflow-hidden rounded-2xl border border-border bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring"
               >
-                <LayoutGrid size={22} strokeWidth={1.75} className="text-primary" />
-                <p className="mt-5 text-sm font-semibold text-text-heading">{c.name}</p>
-                <p className="mt-1 text-xs text-text-tertiary">{c.blurb}</p>
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  <Image
+                    src={categoryImage[c.slug] ?? "/placeholder.svg"}
+                    alt={`${c.name} products`}
+                    fill
+                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                  <h3 className="font-display text-sm font-semibold leading-tight md:text-base">
+                    {c.name}
+                  </h3>
+                  <span className="mt-2 inline-flex translate-y-1 items-center gap-1.5 rounded-full bg-accent-400 px-3 py-1 text-[11px] font-bold text-brand-950 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    Shop now
+                    <ArrowRight size={12} strokeWidth={2.5} />
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
