@@ -1,0 +1,17 @@
+{
+  "name": "Tornaz Stores",
+  "short_name": "Tornaz",
+  "description": "Buy what you need. Pay small small.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0E1C43",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

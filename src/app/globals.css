@@ -1,0 +1,431 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by the `data-theme` attribute on <html> (see layout.tsx).
+   Light is the default; dark is applied only when explicitly chosen. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Tornaz design tokens (ported from the original Tornaz Stores design system)
+   All colors are stored as HSL triplets and used via hsl(var(--token)).
+   Light theme is the default :root; dark overrides on [data-theme="dark"].
+--------------------------------------------------------------------------- */
+:root {
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --shadow: 0 4px 12px #09122a14, 0 2px 4px #09122a0a;
+  --shadow-xs: 0 1px 2px #09122a0d;
+  --shadow-sm: 0 1px 3px #09122a14, 0 1px 2px #09122a0a;
+  --shadow-md: 0 4px 12px #09122a14, 0 2px 4px #09122a0a;
+  --shadow-lg: 0 12px 28px #09122a1a, 0 4px 8px #09122a0d;
+  --shadow-xl: 0 24px 48px #09122a24, 0 8px 16px #09122a0f;
+  --shadow-focus: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--focus-ring);
+
+  /* Brand (navy) scale */
+  --brand-50: 224 60% 96%;
+  --brand-100: 224 60% 91%;
+  --brand-200: 224 58% 83%;
+  --brand-300: 224 56% 72%;
+  --brand-400: 224 54% 60%;
+  --brand-500: 224 56% 48%;
+  --brand-600: 224 60% 39%;
+  --brand-700: 224 63% 30%;
+  --brand-800: 224 64% 23%;
+  --brand-900: 224 65% 16%;
+  --brand-950: 224 66% 10%;
+
+  /* Accent (gold) scale */
+  --accent-50: 44 92% 96%;
+  --accent-100: 44 92% 90%;
+  --accent-200: 43 92% 80%;
+  --accent-300: 42 91% 68%;
+  --accent-400: 42 90% 58%;
+  --accent-500: 42 92% 50%;
+  --accent-600: 38 92% 44%;
+  --accent-700: 34 89% 36%;
+  --accent-800: 30 84% 29%;
+  --accent-900: 27 80% 23%;
+  --accent-950: 25 84% 14%;
+
+  /* Neutral scale */
+  --neutral-50: 222 30% 98%;
+  --neutral-100: 222 26% 95%;
+  --neutral-200: 222 22% 90%;
+  --neutral-300: 222 18% 82%;
+  --neutral-400: 222 14% 64%;
+  --neutral-500: 222 12% 48%;
+  --neutral-600: 222 14% 38%;
+  --neutral-700: 222 18% 28%;
+  --neutral-800: 222 22% 19%;
+  --neutral-900: 222 26% 13%;
+  --neutral-950: 222 32% 8%;
+
+  /* Semantic surfaces */
+  --bg-canvas: 0 0% 100%;
+  --bg-sunken: 222 30% 98%;
+  --bg-muted: 222 26% 95%;
+  --surface: 0 0% 100%;
+  --surface-raised: 0 0% 100%;
+  --surface-inverse: 224 65% 16%;
+  --border: 222 22% 90%;
+  --border-strong: 222 18% 82%;
+  --border-brand: 224 58% 83%;
+
+  /* Text */
+  --text-primary: 222 26% 13%;
+  --text-heading: 224 65% 16%;
+  --text-secondary: 222 14% 38%;
+  --text-tertiary: 222 12% 48%;
+  --text-inverse: 0 0% 100%;
+  --text-on-accent: 224 66% 10%;
+
+  /* Brand actions */
+  --primary: 224 63% 30%;
+  --primary-hover: 224 64% 23%;
+  --primary-active: 224 65% 16%;
+  --accent: 42 92% 50%;
+  --accent-hover: 38 92% 44%;
+  --focus-ring: 224 56% 48%;
+
+  /* State colors */
+  --state-success: 152 62% 32%;
+  --state-warning: 20 86% 35%;
+  --state-danger: 356 74% 44%;
+  --state-info: 196 88% 32%;
+  --state-success-bg: 152 60% 95%;
+  --state-warning-bg: 24 92% 96%;
+  --state-danger-bg: 356 90% 96%;
+  --state-info-bg: 196 82% 95%;
+  --state-success-fg: 152 64% 25%;
+  --state-warning-fg: 20 86% 35%;
+  --state-danger-fg: 356 76% 35%;
+  --state-info-fg: 196 90% 26%;
+  --state-success-strong: 152 62% 20%;
+  --state-warning-strong: 18 82% 28%;
+  --state-danger-strong: 356 76% 28%;
+  --state-info-strong: 197 88% 21%;
+
+  --accent-bg: 44 92% 96%;
+  --accent-fg: 27 80% 23%;
+
+  /* Brand mark */
+  --mark-ink: 224 63% 30%;
+  --mark-gold: 42 92% 50%;
+}
+
+:root[data-theme="dark"],
+.dark {
+  --bg-canvas: 224 66% 10%;
+  --bg-sunken: 224 70% 7%;
+  --bg-muted: 224 65% 16%;
+  --surface: 224 65% 16%;
+  --surface-raised: 224 64% 23%;
+  --surface-inverse: 222 26% 95%;
+  --border: 224 64% 23%;
+  --border-strong: 224 63% 30%;
+  --border-brand: 34 89% 36%;
+  --text-primary: 222 26% 95%;
+  --text-heading: 0 0% 100%;
+  --text-secondary: 222 18% 82%;
+  --text-tertiary: 222 14% 64%;
+  --text-inverse: 224 66% 10%;
+  --text-on-accent: 224 66% 10%;
+  --primary: 42 90% 58%;
+  --primary-hover: 42 91% 68%;
+  --primary-active: 43 92% 80%;
+  --accent: 42 90% 58%;
+  --accent-hover: 42 91% 68%;
+  --focus-ring: 42 91% 68%;
+  --state-success: 152 50% 62%;
+  --state-warning: 24 88% 68%;
+  --state-danger: 356 84% 72%;
+  --state-info: 196 78% 62%;
+  --state-success-bg: 152 60% 15%;
+  --state-warning-bg: 16 78% 22%;
+  --state-danger-bg: 356 74% 21%;
+  --state-info-bg: 198 86% 16%;
+  --state-success-fg: 152 50% 62%;
+  --state-warning-fg: 24 88% 68%;
+  --state-danger-fg: 356 84% 72%;
+  --state-info-fg: 196 78% 62%;
+  --state-success-strong: 152 50% 62%;
+  --state-warning-strong: 24 88% 68%;
+  --state-danger-strong: 356 84% 72%;
+  --state-info-strong: 196 78% 62%;
+  --accent-bg: 27 80% 23%;
+  --accent-fg: 43 92% 80%;
+  --mark-ink: 222 26% 95%;
+  --mark-gold: 42 90% 58%;
+}
+
+.light {
+  --bg-canvas: 0 0% 100%;
+  --bg-sunken: 222 30% 98%;
+  --bg-muted: 222 26% 95%;
+  --surface: 0 0% 100%;
+  --surface-raised: 0 0% 100%;
+  --surface-inverse: 224 65% 16%;
+  --border: 222 22% 90%;
+  --border-strong: 222 18% 82%;
+  --border-brand: 224 58% 83%;
+  --text-primary: 222 26% 13%;
+  --text-heading: 224 65% 16%;
+  --text-secondary: 222 14% 38%;
+  --text-tertiary: 222 12% 48%;
+  --text-inverse: 0 0% 100%;
+  --text-on-accent: 224 66% 10%;
+  --primary: 224 63% 30%;
+  --primary-hover: 224 64% 23%;
+  --primary-active: 224 65% 16%;
+  --accent: 42 92% 50%;
+  --accent-hover: 38 92% 44%;
+  --focus-ring: 224 56% 48%;
+  --state-success: 152 62% 32%;
+  --state-warning: 20 86% 35%;
+  --state-danger: 356 74% 44%;
+  --state-info: 196 88% 32%;
+  --state-success-bg: 152 60% 95%;
+  --state-warning-bg: 24 92% 96%;
+  --state-danger-bg: 356 90% 96%;
+  --state-info-bg: 196 82% 95%;
+  --state-success-fg: 152 64% 25%;
+  --state-warning-fg: 20 86% 35%;
+  --state-danger-fg: 356 76% 35%;
+  --state-info-fg: 196 90% 26%;
+  --state-success-strong: 152 62% 20%;
+  --state-warning-strong: 18 82% 28%;
+  --state-danger-strong: 356 76% 28%;
+  --state-info-strong: 197 88% 21%;
+  --accent-bg: 44 92% 96%;
+  --accent-fg: 27 80% 23%;
+  --mark-ink: 224 63% 30%;
+  --mark-gold: 42 92% 50%;
+}
+
+/* ---------------------------------------------------------------------------
+   Map design tokens to Tailwind utilities.
+   e.g. bg-surface, text-text-heading, border-border, bg-brand-900,
+        text-accent-300, fill-mark-ink, ring-focus-ring, bg-state-danger-bg
+--------------------------------------------------------------------------- */
+@theme inline {
+  --color-bg-canvas: hsl(var(--bg-canvas));
+  --color-bg-sunken: hsl(var(--bg-sunken));
+  --color-bg-muted: hsl(var(--bg-muted));
+  --color-surface: hsl(var(--surface));
+  --color-surface-raised: hsl(var(--surface-raised));
+  --color-surface-inverse: hsl(var(--surface-inverse));
+  --color-border: hsl(var(--border));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-border-brand: hsl(var(--border-brand));
+
+  --color-text-heading: hsl(var(--text-heading));
+  --color-text-primary: hsl(var(--text-primary));
+  --color-text-secondary: hsl(var(--text-secondary));
+  --color-text-tertiary: hsl(var(--text-tertiary));
+  --color-text-inverse: hsl(var(--text-inverse));
+  --color-text-on-accent: hsl(var(--text-on-accent));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-hover: hsl(var(--primary-hover));
+  --color-primary-active: hsl(var(--primary-active));
+  --color-accent: hsl(var(--accent));
+  --color-accent-hover: hsl(var(--accent-hover));
+  --color-accent-bg: hsl(var(--accent-bg));
+  --color-accent-fg: hsl(var(--accent-fg));
+  --color-focus-ring: hsl(var(--focus-ring));
+  --color-mark-ink: hsl(var(--mark-ink));
+  --color-mark-gold: hsl(var(--mark-gold));
+
+  --color-brand-50: hsl(var(--brand-50));
+  --color-brand-100: hsl(var(--brand-100));
+  --color-brand-200: hsl(var(--brand-200));
+  --color-brand-300: hsl(var(--brand-300));
+  --color-brand-400: hsl(var(--brand-400));
+  --color-brand-500: hsl(var(--brand-500));
+  --color-brand-600: hsl(var(--brand-600));
+  --color-brand-700: hsl(var(--brand-700));
+  --color-brand-800: hsl(var(--brand-800));
+  --color-brand-900: hsl(var(--brand-900));
+  --color-brand-950: hsl(var(--brand-950));
+
+  --color-accent-50: hsl(var(--accent-50));
+  --color-accent-100: hsl(var(--accent-100));
+  --color-accent-200: hsl(var(--accent-200));
+  --color-accent-300: hsl(var(--accent-300));
+  --color-accent-400: hsl(var(--accent-400));
+  --color-accent-500: hsl(var(--accent-500));
+  --color-accent-600: hsl(var(--accent-600));
+  --color-accent-700: hsl(var(--accent-700));
+  --color-accent-800: hsl(var(--accent-800));
+  --color-accent-900: hsl(var(--accent-900));
+  --color-accent-950: hsl(var(--accent-950));
+
+  --color-neutral-50: hsl(var(--neutral-50));
+  --color-neutral-100: hsl(var(--neutral-100));
+  --color-neutral-200: hsl(var(--neutral-200));
+  --color-neutral-300: hsl(var(--neutral-300));
+  --color-neutral-400: hsl(var(--neutral-400));
+  --color-neutral-500: hsl(var(--neutral-500));
+  --color-neutral-600: hsl(var(--neutral-600));
+  --color-neutral-700: hsl(var(--neutral-700));
+  --color-neutral-800: hsl(var(--neutral-800));
+  --color-neutral-900: hsl(var(--neutral-900));
+  --color-neutral-950: hsl(var(--neutral-950));
+
+  --color-state-success: hsl(var(--state-success));
+  --color-state-warning: hsl(var(--state-warning));
+  --color-state-danger: hsl(var(--state-danger));
+  --color-state-info: hsl(var(--state-info));
+  --color-state-success-bg: hsl(var(--state-success-bg));
+  --color-state-warning-bg: hsl(var(--state-warning-bg));
+  --color-state-danger-bg: hsl(var(--state-danger-bg));
+  --color-state-info-bg: hsl(var(--state-info-bg));
+  --color-state-success-fg: hsl(var(--state-success-fg));
+  --color-state-warning-fg: hsl(var(--state-warning-fg));
+  --color-state-danger-fg: hsl(var(--state-danger-fg));
+  --color-state-info-fg: hsl(var(--state-info-fg));
+  --color-state-success-strong: hsl(var(--state-success-strong));
+  --color-state-warning-strong: hsl(var(--state-warning-strong));
+  --color-state-danger-strong: hsl(var(--state-danger-strong));
+  --color-state-info-strong: hsl(var(--state-info-strong));
+
+  --radius: var(--radius);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+}
+
+/* ---------------------------------------------------------------------------
+   Base styles
+--------------------------------------------------------------------------- */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border: 0 solid;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: hsl(var(--bg-canvas));
+    color: hsl(var(--text-primary));
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: hsl(var(--text-heading));
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  button,
+  input,
+  select,
+  optgroup,
+  textarea {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    opacity: 1;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  ::placeholder {
+    opacity: 1;
+    color: color-mix(in oklab, currentcolor 50%, transparent);
+  }
+
+  img,
+  svg,
+  video {
+    vertical-align: middle;
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Font utilities
+--------------------------------------------------------------------------- */
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility font-body {
+  font-family: var(--font-body);
+}
+
+/* Focus ring used across interactive elements */
+@utility focus-ring {
+  outline: none;
+  --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 2px var(--tw-ring-offset-width, 0px) var(--tw-ring-color, var(--color-focus-ring));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Keyframe animations used by the announcement bar and hero carousel
+--------------------------------------------------------------------------- */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
