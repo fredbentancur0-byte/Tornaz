@@ -83,14 +83,12 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               loading={i === 0 ? "eager" : "lazy"}
               className="h-full w-full object-cover"
             />
-            {/* Navy gradient overlay for text legibility */}
+            {/* Light scrim over the pre-designed banner so text stays legible
+                without double-darkening it (the banner already has a navy
+                gradient baked in on the left). */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-r from-brand-950/95 via-brand-950/75 to-brand-950/30"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-950/90 via-brand-950/40 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-brand-950/55 via-brand-950/25 to-transparent"
             />
           </div>
         ))}

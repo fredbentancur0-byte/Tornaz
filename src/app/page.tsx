@@ -10,33 +10,35 @@ import { HeroCarousel, type HeroSlide } from "@/components/hero-carousel";
 export default async function HomePage() {
   const allProducts = await fetchProducts();
 
-  // Hero slides: full-bleed image carousel in JMPotters style, built from
-  // featured physical products so the carousel always reflects the catalog.
+  // Hero slides: full-bleed image carousel in JMPotters style. Each slide
+  // uses a wide-format (1920x700) banner built from the store's product photos
+  // on a navy/gold background, so the hero fits the layout regardless of the
+  // screen width (no more cropping tiny square product shots).
   const heroSlides: HeroSlide[] = [
     {
-      image: "/media/products/bright-3-5kva-petrol-generator/1.png",
-      eyebrow: "A marketplace built for the things you need",
-      title: "Shop better, without paying all at once.",
+      image: "/media/hero/hero-electrics.gif",
+      eyebrow: "Power that pays for itself",
+      title: "Shop generators, inverters & solar — built to last.",
       copy: "Discover products from trusted sellers. On eligible physical items, pay 60% today and the rest in two smaller payments.",
       primary: { label: "Shop products", href: "/products" },
       secondary: { label: "How Pay Small Small works", href: "/pay-small-small" },
       showSearch: true,
     },
     {
-      image: "/media/products/tecno-spark-smartphone/1.png",
+      image: "/media/hero/hero-phones.gif",
       eyebrow: "Pay Small Small eligible",
-      title: "Bring home the bigger things with a clearer payment plan.",
+      title: "Phones worth upgrading to — with a clearer payment plan.",
       copy: "Pay 60% at checkout, then 20% in 30 days and 20% in 60 days. Your item is delivered after the final payment clears.",
       primary: { label: "See how it works", href: "/pay-small-small" },
       secondary: { label: "Eligible products", href: "/products?payment=pay-small-small" },
     },
     {
-      image: "/media/products/solar-home-starter-kit/1.png",
-      eyebrow: "Grow with Tornaz",
-      title: "There is more than one way to build on the marketplace.",
-      copy: "Open a storefront and list your products, or share products you rate and earn commission on completed orders.",
-      primary: { label: "Explore selling", href: "/sell-on-tornaz" },
-      secondary: { label: "Become a reseller", href: "/resell-with-tornaz" },
+      image: "/media/hero/hero-appliances.gif",
+      eyebrow: "Make life easier at home",
+      title: "Fans, appliances & home essentials, delivered.",
+      copy: "From cooling to cooking, upgrade your home with everyday essentials and pay small small.",
+      primary: { label: "Shop appliances", href: "/products?category=home-appliances" },
+      secondary: { label: "See all products", href: "/products" },
     },
   ];
 
