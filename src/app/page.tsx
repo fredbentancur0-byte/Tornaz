@@ -6,39 +6,41 @@ import { CATEGORIES } from "@/lib/constants";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
 import { HeroCarousel, type HeroSlide } from "@/components/hero-carousel";
+import { HeroLinksStrip } from "@/components/hero-links-strip";
 
 export default async function HomePage() {
   const allProducts = await fetchProducts();
 
-  // Hero slides: full-bleed image carousel in JMPotters style. Each slide
-  // uses a wide-format (1920x700) banner built from the store's product photos
-  // on a navy/gold background, so the hero fits the layout regardless of the
-  // screen width (no more cropping tiny square product shots).
+  // Hero slides: full-bleed image carousel in JMPotters style. The images are
+  // the store's own hero photos (no baked-in text); the carousel keeps only a
+  // light eyebrow + headline overlay — no search bar, no CTA buttons here.
+  // The important links (Pay Small Small, eligible products, selling, etc.)
+  // live in the sliding strip directly beneath the hero instead.
   const heroSlides: HeroSlide[] = [
     {
-      image: "/media/hero/hero-electrics.gif",
-      eyebrow: "Power that pays for itself",
-      title: "Shop generators, inverters & solar — built to last.",
-      copy: "Discover products from trusted sellers. On eligible physical items, pay 60% today and the rest in two smaller payments.",
-      primary: { label: "Shop products", href: "/products" },
-      secondary: { label: "How Pay Small Small works", href: "/pay-small-small" },
-      showSearch: true,
+      image: "/media/hero/0b7dd5b1d5eee40ef5cbe6f111c4d161.jpg",
+      eyebrow: "Tornaz",
+      title: "Shop what you need. Pay small small.",
     },
     {
-      image: "/media/hero/hero-phones.gif",
-      eyebrow: "Pay Small Small eligible",
-      title: "Phones worth upgrading to — with a clearer payment plan.",
-      copy: "Pay 60% at checkout, then 20% in 30 days and 20% in 60 days. Your item is delivered after the final payment clears.",
-      primary: { label: "See how it works", href: "/pay-small-small" },
-      secondary: { label: "Eligible products", href: "/products?payment=pay-small-small" },
+      image: "/media/hero/fee8f8b4f73e5047d239f23b0fefe7b4.jpg",
+      eyebrow: "Tornaz",
+      title: "Bigger things, clearer payment plans.",
     },
     {
-      image: "/media/hero/hero-appliances.gif",
-      eyebrow: "Make life easier at home",
-      title: "Fans, appliances & home essentials, delivered.",
-      copy: "From cooling to cooking, upgrade your home with everyday essentials and pay small small.",
-      primary: { label: "Shop appliances", href: "/products?category=home-appliances" },
-      secondary: { label: "See all products", href: "/products" },
+      image: "/media/hero/1785024664094_g7flie.jpg",
+      eyebrow: "Tornaz",
+      title: "Electronics built to last, delivered.",
+    },
+    {
+      image: "/media/hero/original-46d14b0a511fdf6cf11a68535d20b356.webp",
+      eyebrow: "Tornaz",
+      title: "Trusted sellers. Escrow-protected orders.",
+    },
+    {
+      image: "/media/hero/09b6c602fd139eb7e5d6d84afa05ddfa.webp",
+      eyebrow: "Tornaz",
+      title: "From power to phones — one marketplace.",
     },
   ];
 
@@ -69,6 +71,9 @@ export default async function HomePage() {
     <>
       {/* Hero — JMPotters-style full-width image carousel */}
       <HeroCarousel slides={heroSlides} />
+
+      {/* Sliding links strip (JMPotters marquee style) */}
+      <HeroLinksStrip />
 
       {/* Shop by category */}
       <section aria-labelledby="categories-h2" className="bg-bg-sunken">

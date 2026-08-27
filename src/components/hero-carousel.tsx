@@ -2,18 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { LinkButton } from "@/components/button";
-import { HeroSearch } from "@/components/hero-search";
 import { cn } from "@/lib/utils";
 
 export interface HeroSlide {
   image: string;
   eyebrow: string;
   title: string;
-  copy: string;
-  primary: { label: string; href: string };
-  secondary: { label: string; href: string };
-  showSearch?: boolean;
 }
 
 const SLIDE_MS = 6000;
@@ -66,7 +60,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         touchStartX.current = null;
       }}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[21/9]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[16/7]">
         {slides.map((slide, i) => (
           <div
             key={slide.title}
@@ -83,12 +77,14 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               loading={i === 0 ? "eager" : "lazy"}
               className="h-full w-full object-cover"
             />
-            {/* Light scrim over the pre-designed banner so text stays legible
-                without double-darkening it (the banner already has a navy
-                gradient baked in on the left). */}
+            {/* Navy scrim so the headline stays legible over any photo. */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-r from-brand-950/55 via-brand-950/25 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-brand-950/85 via-brand-950/40 to-brand-950/5"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-950/80 to-transparent"
             />
           </div>
         ))}
@@ -111,24 +107,12 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
               >
                 {i === index && (
                   <>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-300 md:text-sm">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent-300 md:text-sm">
                       {slide.eyebrow}
                     </p>
-                    <h1 className="mt-3 font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl">
+                    <h1 className="mt-3 max-w-3xl font-display text-2xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl">
                       {slide.title}
                     </h1>
-                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-neutral-200 md:text-lg">
-                      {slide.copy}
-                    </p>
-                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                      <LinkButton href={slide.primary.href} variant="accent" size="lg">
-                        {slide.primary.label}
-                      </LinkButton>
-                      <LinkButton href={slide.secondary.href} variant="inverse" size="lg">
-                        {slide.secondary.label}
-                      </LinkButton>
-                    </div>
-                    {slide.showSearch && <HeroSearch />}
                   </>
                 )}
               </div>
